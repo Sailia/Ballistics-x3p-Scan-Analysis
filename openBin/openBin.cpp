@@ -1,5 +1,5 @@
 // openBin.cpp : This file contains the 'main' function. Program execution begins and ends there.
-
+//
 
 #include "pch.h" //why is this here
 #include <iostream>
@@ -7,13 +7,21 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+
 int main()
 {
-	int xDim = 3671, yDim = 1023;
-	std::string inputTxt = "C:/Users/tji/source/repos/openBin/openBin/data.bin";
-	std::string outputTxt = "C:/Users/tji/source/repos/openBin/openBin/numbers.txt";
+	int xDim = 3671, yDim = 1023, nancount = 0, rowcount = 0;
+	double totalValues = xDim * yDim;
+
+
+	std::string nan = "";
+	std::string inputTxt = "C:/Users/Sailia/Desktop/openBin/openBin/data.bin";
+	std::string outputTxt = "C:/Users/Sailia/Desktop/openBin/openBin/numbers.txt";
 
 	std::vector<std::vector<double> > dataMatrix;
+	std::vector<std::vector<int> > Xnans;
+	std::vector<std::vector<int> > Ynans;
+
 	double data;
 	std::ifstream input;
 	std::ofstream output;
@@ -23,7 +31,7 @@ int main()
 
 	//include bool checks on file in separate method
 	//iterators
-	for(int i = 0; i < yDim; ++i) { //while we are not at the end of the file
+	for (int i = 0; i < 5; ++i) { //while we are not at the end of the file
 		std::vector<double> dataRow;
 		dataMatrix.push_back(dataRow);
 		for (int j = 0; j < xDim; ++j) {
@@ -31,16 +39,29 @@ int main()
 			dataMatrix[i].push_back(data);
 			std::cout << std::setw(10) << dataMatrix[i][j];
 			output << std::setw(10) << dataMatrix[i][j];
+			if (dataMatrix[i][j] != dataMatrix[i][j]) { //Checks for nans
+				nancount++;
+				Xnans[j] = Xnans[j] + 1;
+				Ynans[j] = Ynans[j] + 1;
+				//rowcount++;
+			}
 		}
 		std::cout << std::endl;
+		//std::cout << rowcount << std::endl;
+		//rowcount = 0;
 		output << std::endl;
 	}
+
+	std::cout << "Missing Values " << nancount << std::endl;
+	double percentage = nancount / totalValues * 100;
+	std::cout << "Percentage is " << percentage << std::endl;
+
 	input.close(); //close input file
 	output.close();// close output file 
 
 
 
-	//test
+
 
 	//std::vector<float> data; // vector stores floats in "data"
 	//std::ifstream f; // declare variable for ifstream to read from "testnum.txt" file
