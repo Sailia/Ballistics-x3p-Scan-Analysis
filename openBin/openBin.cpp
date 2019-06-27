@@ -19,8 +19,10 @@ int main()
 	std::string outputTxt = "C:/Users/Sailia/Desktop/openBin/openBin/numbers.txt";
 
 	std::vector<std::vector<double> > dataMatrix;
-	std::vector<std::vector<int> > Xnans;
-	std::vector<std::vector<int> > Ynans;
+	//std::vector<std::vector<int> > Xnans;
+	//std::vector<std::vector<int> > Ynans;
+	std::vector<int> Xnans(xDim, 0); // Create a vector of size xDim with all values as 0. 
+	std::vector<int> Ynans(yDim, 0);
 
 	double data;
 	std::ifstream input;
@@ -42,8 +44,8 @@ int main()
 			if (dataMatrix[i][j] != dataMatrix[i][j]) { //Checks for nans
 				nancount++;
 				Xnans[j] = Xnans[j] + 1;
-				Ynans[j] = Ynans[j] + 1;
-				//rowcount++;
+				Ynans[i] = Ynans[i] + 1;
+				
 			}
 		}
 		std::cout << std::endl;
@@ -52,9 +54,35 @@ int main()
 		output << std::endl;
 	}
 
-	std::cout << "Missing Values " << nancount << std::endl;
+
+	//Missing Values Stats
+
+	//Overall MV count
 	double percentage = nancount / totalValues * 100;
+	std::cout << "Missing Values " << nancount << std::endl;
 	std::cout << "Percentage is " << percentage << std::endl;
+
+	std::cout << "\nMissing Values per row: " << std::endl;
+	for (int i = 0; i < 5; i++) {
+			std::cout << i << " " << Ynans[i];
+		}
+	}
+    std::cout << "Missing Values per column: " << std::endl;
+	for (int j = 0; i < xDim; j++) {
+		std::cout << j << " " << Xnans[j];
+	}
+
+
+
+
+
+
+	/*for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < xDim; j++) {
+			std::cout << j << i << " " << Xnans[j];
+		}
+	}*/
+
 
 	input.close(); //close input file
 	output.close();// close output file 
