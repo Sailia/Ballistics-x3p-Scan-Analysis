@@ -1,7 +1,7 @@
 // openBin.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include "pch.h" //why is this here
+#include "pch.h" //Emmanuelle was here 2019
 #include <iostream>
 #include <fstream>
 #include <string>
