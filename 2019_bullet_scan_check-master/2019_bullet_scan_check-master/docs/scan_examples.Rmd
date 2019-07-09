@@ -1,0 +1,50 @@
+---
+title: "Bullet Scan Examples"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+library(tidyverse)
+```
+
+## Breakoff
+This is a goldilocks problem - we want to see some breakoff at the bottom, but  we also want a good amount of striae. Scans 1-2 have not enough striae and no breakoff; scans 3-5 have mostly breakoff and very little striae. 
+```{r, include = T}
+list.files(file.path("figure", "problem_scans", "breakoff_issues"), full.names = T) %>%
+knitr::include_graphics()
+```
+
+## Groove Engraved Areas
+GEAs are narrower than Land engraved areas (LEAs).
+```{r, include = T}
+list.files(file.path("figure", "problem_scans", "gea_scans"), full.names = T) %>%
+knitr::include_graphics()
+```
+
+## Misaligned
+
+Alignment is also important - the bullet should not be tilted one way or another. 
+```{r, include = T}
+list.files(file.path("figure", "problem_scans", "misaligned_on_scope"), full.names = T) %>%
+knitr::include_graphics()
+```
+
+## Tank rash or pitting
+
+This probably can't be completely helped, as it's an artifact of the bullet itself, but here's what it looks like anyways:
+
+```{r, include = T}
+list.files(file.path("figure", "problem_scans", "tankrash_or_pitting"), full.names = T) %>%
+knitr::include_graphics()
+```
+
+
+
+## Good scans 
+
+```{r, include = T}
+list.files(file.path("figure", "good_scans", "good"), full.names = T, recursive = T) %>%
+  knitr::include_graphics()
+
+```
