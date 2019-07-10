@@ -7,43 +7,235 @@
 #include <string>
 #include <vector>
 #include <iomanip>
-int main()
+#include <cstdlib>
+#include <sstream>
+#include <direct.h>
+#include "stdafx.h"
+#include "zipper.h"
+#include "unzipper.h"
+#include <filesystem>
+
+using namespace ziputils;
+namespace fs = std::experimental::filesystem;
+
+std::string getFile(std::string fileName) {
+	std::string buffer;
+	char c;
+
+	std::ifstream in(fileName);   
+	if (!in) { 
+		std::cout << fileName << " not found";   exit(1); 
+	}
+	while (in.get(c)) buffer += c;
+	in.close();
+
+	return buffer;
+}
+
+std::vector<std::string> getData(const std::string &text, std::string tag)
 {
-	int xDim = 3671, yDim = 2; //yDim = 1023
-	std::string inputTxt = "E:/SPIRE-EIT/Ballistics/openBin/openBin/data.bin";
-	std::string outputTxt = "E:/SPIRE-EIT/Ballistics/openBin/openBin/numbers.txt";
+	std::vector<std::string> collection;
+	unsigned int pos = 0, start;
 
-	std::vector<std::vector<double> > dataMatrix;
+	while (true)
+	{
+		start = text.find("<" + tag, pos);   if (start == std::string::npos) return collection;
+		start = text.find(">", start);
+		start++;
+
+		pos = text.find("</" + tag, start);   if (pos == std::string::npos) return collection;
+		collection.push_back(text.substr(start, pos - start));
+	}
+}
+
+void stripTags(std::string &text)
+{
+	unsigned int start = 0, pos;
+
+	while (start < text.size())
+	{
+		start = text.find("<", start);    if (start == std::string::npos) break;
+		pos = text.find(">", start);    if (pos == std::string::npos) break;
+		text.erase(start, pos - start + 1);
+	}
+}
+
+void unzip(std::string unzipFilePath, std::string outputPath)
+{
+	unzipper zipFile;
+	zipFile.open(unzipFilePath.c_str());
+	auto filenames = zipFile.getFilenames();
+
+	for (auto it = filenames.begin(); it != filenames.end(); it++)
+	{
+		std::string filePath = outputPath +"/"+ *it;
+		std::ofstream placeInFolder;
+		placeInFolder.open(filePath);
+		zipFile.openEntry((*it).c_str());
+		zipFile >> placeInFolder;
+
+		placeInFolder.close();
+	}
+}
+
+std::vector<std::string> fileNames(std::string folderPath) {
+	std::vector<std::string> nameList;
+	for (const auto & entry : fs::directory_iterator(folderPath)) {
+		nameList.push_back(entry.path().string());
+		std::cout << "File found: " + entry.path().string() << std::endl;
+	}
+	return nameList;
+}
+
+int getDim(std::string xmlFilePath, std::string dimTag) {
+	int dim = 0;;
+
+	std::string text = getFile(xmlFilePath);
+	std::vector<std::string> allXTag = getData(text, dimTag);
+	for (std::string &s : allXTag)
+	{
+		stripTags(s);
+		std::stringstream toInt(s);
+		toInt >> dim;
+	}
+
+	return dim;
+}
+
+void processDataMatrix(std::string tempStorageFilePath,std::string resultOutputFilePath) {
+	std::vector<std::vector<double>> dataMatrix;
+	int xDim = getDim(tempStorageFilePath + "/main.xml", "SizeX"), yDim = getDim(tempStorageFilePath + "\\main.xml", "SizeY");
+	std::vector<float> colNanPercent(xDim,0), rowNanPercent(yDim,0);
+
 	double data;
+
 	std::ifstream input;
-	std::ofstream output;
 
-
-
-
-	input.open(inputTxt, std::ios::binary); // reads binary file and converts binary (ios::binary, overloads)
-	output.open(outputTxt); // opening what we're writing to
+	input.open(tempStorageFilePath + "/bindata/data.bin", std::ios::binary); // reads binary file and converts binary (ios::binary, overloads)
 
 	//include bool checks on file in separate method
 	//iterators
 	for(int i = 0; i < yDim; ++i) { //while we are not at the end of the file
-		std::vector<double> dataRow; //initialize vector
+		std::vector<double> dataRow;
 		dataMatrix.push_back(dataRow);
 		for (int j = 0; j < xDim; ++j) {
 			input.read((char*)&data, sizeof(data)); // read next line into "data"
 			dataMatrix[i].push_back(data);
-			std::cout << std::setw(10) << dataMatrix[i][j];
-			output << std::setw(10) << dataMatrix[i][j];
+			std::cout << dataMatrix[i][j] << std::endl;
+			if (dataMatrix[i][j] != dataMatrix[i][j]) {
+				++rowNanPercent[i];
+				++colNanPercent[j];
+			}
+			if (i+1 == yDim) {
+				colNanPercent[j] /= yDim;
+			}
+			input.read((char*)&data, sizeof('\n'));
 		}
-		std::cout << std::endl;
-		output << std::endl;
+		rowNanPercent[i] /= xDim;
 	}
 	input.close(); //close input file
-	output.close();// close output file 
 
+	std::ofstream resultOutput;
+	resultOutput.open(resultOutputFilePath);
 
+	for (int i = 0; i < yDim; ++i) {
+		resultOutput << i + " row percent: ";
+		resultOutput << rowNanPercent[i];
+		resultOutput << " " << std::endl;
+	}
 
+	for (int i = 0; i < xDim; ++i) {
+		resultOutput << i + " col percent: ";
+		resultOutput << colNanPercent[i];
+		resultOutput << " " << std::endl;
+	}
 
+	resultOutput.close();
+}
+
+std::string dataPath, tempPath;
+std::vector<std::string> x3pNames;
+
+int main()
+{
+	//std::cout << "Please enter the file path to the data directory: " << std::endl;
+	//std::cin >> dataPath;
+	//std::cout << "Please enter the file path to the properly formatted temporary storage directory: " << std::endl;
+	//std::cin >> tempPath;
+
+	//x3pNames = fileNames(dataPath);
+
+	//for (std::string path : x3pNames) {
+	//	unzip(path, tempPath);
+	//	//std::ofstream output;
+	//	//output.open()
+	//	//processDataMatrix(tempPath,)
+	//}
+
+	processDataMatrix("C:/Users/tji/source/repos/openBin/openBin/testzipoutput", "C:/Users/tji/source/repos/openBin/openBin/testfolder/testresults.txt");
+
+	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+	//_mkdir("C:/Users/tji/source/repos/openBin/openBin/testfolder");
+
+	//Push Data into matrix
+
+	//int xDim = 3671, yDim = 1023;
+	//std::string inputTxt = "C:/Users/tji/source/repos/openBin/openBin/data.bin";
+	////std::string outputTxt = "C:/Users/tji/source/repos/openBin/openBin/numbers.txt";
+
+	//std::vector<std::vector<double> > dataMatrix;
+	//double data;
+	//std::ifstream input;
+	////std::ofstream output;
+
+	//input.open(inputTxt, std::ios::binary); // reads binary file and converts binary (ios::binary, overloads)
+	////output.open(outputTxt); // opening what we're writing to
+
+	////include bool checks on file in separate method
+	////iterators
+	//for(int i = 0; i < yDim; ++i) { //while we are not at the end of the file
+	//	std::vector<double> dataRow;
+	//	dataMatrix.push_back(dataRow);
+	//	for (int j = 0; j < xDim; ++j) {
+	//		input.read((char*)&data, sizeof(data)); // read next line into "data"
+	//		dataMatrix[i].push_back(data);
+	//		//std::cout << std::setw(10) << dataMatrix[i][j];
+	//		/*if (dataMatrix[i][j] != dataMatrix[i][j]) {
+	//			output << std::setw(10) << 0;
+	//		}*/
+	//		/*else {
+	//			output << std::setw(10) << dataMatrix[i][j];
+	//		}*/
+	//	}
+	//	//std::cout << std::endl;
+	//	//output << std::endl;
+	//}
+	//input.close(); //close input file
+	//output.close();// close output file 
+
+	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+	//Read xml
+
+	/*std::string inputTxt = "C:/Users/tji/source/repos/openBin/openBin/main.xml";
+	std::string tag = "SizeX";
+	int yDim = 0;
+
+	std::string text = getFile(inputTxt);
+	std::vector<std::string> all = getData(text, tag);
+	for (std::string &s : all)
+	{
+		stripTags(s);
+		std::stringstream toInt(s);
+		toInt >> yDim;
+	}
+
+	std::cout << yDim << std::endl;*/
+
+	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+	//Make and read bin file
 
 	//std::vector<float> data; // vector stores floats in "data"
 	//std::ifstream f; // declare variable for ifstream to read from "testnum.txt" file

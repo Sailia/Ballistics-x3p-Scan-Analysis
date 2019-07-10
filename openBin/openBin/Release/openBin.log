@@ -1,0 +1,12 @@
+﻿  openBin.cpp
+  pch.cpp
+  stdafx.cpp
+  unzipper.cpp
+  zipper.cpp
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Generating code
+  All 280 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+zlibstat.lib(inffas32.obj) : error LNK2026: module unsafe for SAFESEH image.
+zlibstat.lib(match686.obj) : error LNK2026: module unsafe for SAFESEH image.
+C:\Users\tji\source\repos\openBin\Release\openBin.exe : fatal error LNK1281: Unable to generate SAFESEH image.
