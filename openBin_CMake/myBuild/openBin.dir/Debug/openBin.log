@@ -1,0 +1,12 @@
+﻿LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+zlibstat.lib(adler32.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'zlibstat.lib(adler32.obj)' or at 'C:\Users\tji\source\repos\openBin_CMake\myBuild\Debug\vc100.pdb'; linking object as if no debug info
+zlibstat.lib(crc32.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'zlibstat.lib(crc32.obj)' or at 'C:\Users\tji\source\repos\openBin_CMake\myBuild\Debug\vc100.pdb'; linking object as if no debug info
+zlibstat.lib(deflate.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'zlibstat.lib(deflate.obj)' or at 'C:\Users\tji\source\repos\openBin_CMake\myBuild\Debug\vc100.pdb'; linking object as if no debug info
+zlibstat.lib(inflate.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'zlibstat.lib(inflate.obj)' or at 'C:\Users\tji\source\repos\openBin_CMake\myBuild\Debug\vc100.pdb'; linking object as if no debug info
+zlibstat.lib(inftrees.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'zlibstat.lib(inftrees.obj)' or at 'C:\Users\tji\source\repos\openBin_CMake\myBuild\Debug\vc100.pdb'; linking object as if no debug info
+zlibstat.lib(ioapi.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'zlibstat.lib(ioapi.obj)' or at 'C:\Users\tji\source\repos\openBin_CMake\myBuild\Debug\vc100.pdb'; linking object as if no debug info
+zlibstat.lib(trees.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'zlibstat.lib(trees.obj)' or at 'C:\Users\tji\source\repos\openBin_CMake\myBuild\Debug\vc100.pdb'; linking object as if no debug info
+zlibstat.lib(unzip.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'zlibstat.lib(unzip.obj)' or at 'C:\Users\tji\source\repos\openBin_CMake\myBuild\Debug\vc100.pdb'; linking object as if no debug info
+zlibstat.lib(zip.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'zlibstat.lib(zip.obj)' or at 'C:\Users\tji\source\repos\openBin_CMake\myBuild\Debug\vc100.pdb'; linking object as if no debug info
+zlibstat.lib(zutil.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'zlibstat.lib(zutil.obj)' or at 'C:\Users\tji\source\repos\openBin_CMake\myBuild\Debug\vc100.pdb'; linking object as if no debug info
+  openBin.vcxproj -> C:\Users\tji\source\repos\openBin_CMake\myBuild\Debug\openBin.exe

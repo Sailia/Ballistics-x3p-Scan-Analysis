@@ -1,0 +1,3 @@
+C:/Users/tji/source/repos/openBin_CMake/myBuild/CMakeFiles/openBin.dir
+C:/Users/tji/source/repos/openBin_CMake/myBuild/CMakeFiles/ALL_BUILD.dir
+C:/Users/tji/source/repos/openBin_CMake/myBuild/CMakeFiles/ZERO_CHECK.dir
