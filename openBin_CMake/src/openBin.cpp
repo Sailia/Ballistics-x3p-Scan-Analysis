@@ -14,8 +14,9 @@
 #include "zipper.h"
 #include "unzipper.h"
 #include "elzip.hpp"
-#include <filesystem>
+#include <experimental/filesystem>
 #include <map>
+#include <math.h>       /* round, floor, ceil, trunc */
 
 using namespace ziputils;
 namespace fs = std::experimental::filesystem;
