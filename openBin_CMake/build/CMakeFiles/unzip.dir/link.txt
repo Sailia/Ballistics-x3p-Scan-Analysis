@@ -1,0 +1,2 @@
+/usr/bin/ar qc libunzip.a  CMakeFiles/unzip.dir/minizip/src/unzip.c.o CMakeFiles/unzip.dir/minizip/src/zip.c.o CMakeFiles/unzip.dir/minizip/src/ioapi.c.o
+/usr/bin/ranlib libunzip.a

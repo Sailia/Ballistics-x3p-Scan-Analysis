@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/openBin.dir/src/elzip.cpp.o CMakeFiles/openBin.dir/src/openBin.cpp.o CMakeFiles/openBin.dir/src/stdafx.cpp.o CMakeFiles/openBin.dir/src/unzipper.cpp.o CMakeFiles/openBin.dir/src/zipper.cpp.o CMakeFiles/openBin.dir/src/pch.cpp.o  -o openBin -lstdc++fs -Wl,-Bstatic -lz -Wl,-Bdynamic 
