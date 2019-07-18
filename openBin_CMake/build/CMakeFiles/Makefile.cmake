@@ -42,6 +42,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/unzip.dir/DependInfo.cmake"
+  "CMakeFiles/ziputils.dir/DependInfo.cmake"
   "CMakeFiles/openBin.dir/DependInfo.cmake"
+  "CMakeFiles/unzip.dir/DependInfo.cmake"
+  "CMakeFiles/elzip.dir/DependInfo.cmake"
   )

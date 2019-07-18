@@ -83,6 +83,18 @@ install/local/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
 # Special rule for the target list_install_components
 list_install_components:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
@@ -92,17 +104,6 @@ list_install_components:
 list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/cmake-gui -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -115,17 +116,16 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/cmake-gui -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
 
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -160,17 +160,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named unzip
+# Target rules for targets named ziputils
 
 # Build rule for target.
-unzip: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 unzip
-.PHONY : unzip
+ziputils: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ziputils
+.PHONY : ziputils
 
 # fast build rule for target.
-unzip/fast:
-	$(MAKE) -f CMakeFiles/unzip.dir/build.make CMakeFiles/unzip.dir/build
-.PHONY : unzip/fast
+ziputils/fast:
+	$(MAKE) -f CMakeFiles/ziputils.dir/build.make CMakeFiles/ziputils.dir/build
+.PHONY : ziputils/fast
 
 #=============================================================================
 # Target rules for targets named openBin
@@ -185,12 +185,39 @@ openBin/fast:
 	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/build
 .PHONY : openBin/fast
 
+#=============================================================================
+# Target rules for targets named unzip
+
+# Build rule for target.
+unzip: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 unzip
+.PHONY : unzip
+
+# fast build rule for target.
+unzip/fast:
+	$(MAKE) -f CMakeFiles/unzip.dir/build.make CMakeFiles/unzip.dir/build
+.PHONY : unzip/fast
+
+#=============================================================================
+# Target rules for targets named elzip
+
+# Build rule for target.
+elzip: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 elzip
+.PHONY : elzip
+
+# fast build rule for target.
+elzip/fast:
+	$(MAKE) -f CMakeFiles/elzip.dir/build.make CMakeFiles/elzip.dir/build
+.PHONY : elzip/fast
+
 minizip/src/ioapi.o: minizip/src/ioapi.c.o
 
 .PHONY : minizip/src/ioapi.o
 
 # target to build an object file
 minizip/src/ioapi.c.o:
+	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/minizip/src/ioapi.c.o
 	$(MAKE) -f CMakeFiles/unzip.dir/build.make CMakeFiles/unzip.dir/minizip/src/ioapi.c.o
 .PHONY : minizip/src/ioapi.c.o
 
@@ -200,6 +227,7 @@ minizip/src/ioapi.i: minizip/src/ioapi.c.i
 
 # target to preprocess a source file
 minizip/src/ioapi.c.i:
+	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/minizip/src/ioapi.c.i
 	$(MAKE) -f CMakeFiles/unzip.dir/build.make CMakeFiles/unzip.dir/minizip/src/ioapi.c.i
 .PHONY : minizip/src/ioapi.c.i
 
@@ -209,6 +237,7 @@ minizip/src/ioapi.s: minizip/src/ioapi.c.s
 
 # target to generate assembly for a file
 minizip/src/ioapi.c.s:
+	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/minizip/src/ioapi.c.s
 	$(MAKE) -f CMakeFiles/unzip.dir/build.make CMakeFiles/unzip.dir/minizip/src/ioapi.c.s
 .PHONY : minizip/src/ioapi.c.s
 
@@ -218,6 +247,7 @@ minizip/src/unzip.o: minizip/src/unzip.c.o
 
 # target to build an object file
 minizip/src/unzip.c.o:
+	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/minizip/src/unzip.c.o
 	$(MAKE) -f CMakeFiles/unzip.dir/build.make CMakeFiles/unzip.dir/minizip/src/unzip.c.o
 .PHONY : minizip/src/unzip.c.o
 
@@ -227,6 +257,7 @@ minizip/src/unzip.i: minizip/src/unzip.c.i
 
 # target to preprocess a source file
 minizip/src/unzip.c.i:
+	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/minizip/src/unzip.c.i
 	$(MAKE) -f CMakeFiles/unzip.dir/build.make CMakeFiles/unzip.dir/minizip/src/unzip.c.i
 .PHONY : minizip/src/unzip.c.i
 
@@ -236,6 +267,7 @@ minizip/src/unzip.s: minizip/src/unzip.c.s
 
 # target to generate assembly for a file
 minizip/src/unzip.c.s:
+	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/minizip/src/unzip.c.s
 	$(MAKE) -f CMakeFiles/unzip.dir/build.make CMakeFiles/unzip.dir/minizip/src/unzip.c.s
 .PHONY : minizip/src/unzip.c.s
 
@@ -245,6 +277,7 @@ minizip/src/zip.o: minizip/src/zip.c.o
 
 # target to build an object file
 minizip/src/zip.c.o:
+	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/minizip/src/zip.c.o
 	$(MAKE) -f CMakeFiles/unzip.dir/build.make CMakeFiles/unzip.dir/minizip/src/zip.c.o
 .PHONY : minizip/src/zip.c.o
 
@@ -254,6 +287,7 @@ minizip/src/zip.i: minizip/src/zip.c.i
 
 # target to preprocess a source file
 minizip/src/zip.c.i:
+	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/minizip/src/zip.c.i
 	$(MAKE) -f CMakeFiles/unzip.dir/build.make CMakeFiles/unzip.dir/minizip/src/zip.c.i
 .PHONY : minizip/src/zip.c.i
 
@@ -263,6 +297,7 @@ minizip/src/zip.s: minizip/src/zip.c.s
 
 # target to generate assembly for a file
 minizip/src/zip.c.s:
+	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/minizip/src/zip.c.s
 	$(MAKE) -f CMakeFiles/unzip.dir/build.make CMakeFiles/unzip.dir/minizip/src/zip.c.s
 .PHONY : minizip/src/zip.c.s
 
@@ -273,6 +308,7 @@ src/elzip.o: src/elzip.cpp.o
 # target to build an object file
 src/elzip.cpp.o:
 	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/src/elzip.cpp.o
+	$(MAKE) -f CMakeFiles/elzip.dir/build.make CMakeFiles/elzip.dir/src/elzip.cpp.o
 .PHONY : src/elzip.cpp.o
 
 src/elzip.i: src/elzip.cpp.i
@@ -282,6 +318,7 @@ src/elzip.i: src/elzip.cpp.i
 # target to preprocess a source file
 src/elzip.cpp.i:
 	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/src/elzip.cpp.i
+	$(MAKE) -f CMakeFiles/elzip.dir/build.make CMakeFiles/elzip.dir/src/elzip.cpp.i
 .PHONY : src/elzip.cpp.i
 
 src/elzip.s: src/elzip.cpp.s
@@ -291,6 +328,7 @@ src/elzip.s: src/elzip.cpp.s
 # target to generate assembly for a file
 src/elzip.cpp.s:
 	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/src/elzip.cpp.s
+	$(MAKE) -f CMakeFiles/elzip.dir/build.make CMakeFiles/elzip.dir/src/elzip.cpp.s
 .PHONY : src/elzip.cpp.s
 
 src/openBin.o: src/openBin.cpp.o
@@ -380,6 +418,7 @@ src/unzipper.o: src/unzipper.cpp.o
 
 # target to build an object file
 src/unzipper.cpp.o:
+	$(MAKE) -f CMakeFiles/ziputils.dir/build.make CMakeFiles/ziputils.dir/src/unzipper.cpp.o
 	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/src/unzipper.cpp.o
 .PHONY : src/unzipper.cpp.o
 
@@ -389,6 +428,7 @@ src/unzipper.i: src/unzipper.cpp.i
 
 # target to preprocess a source file
 src/unzipper.cpp.i:
+	$(MAKE) -f CMakeFiles/ziputils.dir/build.make CMakeFiles/ziputils.dir/src/unzipper.cpp.i
 	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/src/unzipper.cpp.i
 .PHONY : src/unzipper.cpp.i
 
@@ -398,6 +438,7 @@ src/unzipper.s: src/unzipper.cpp.s
 
 # target to generate assembly for a file
 src/unzipper.cpp.s:
+	$(MAKE) -f CMakeFiles/ziputils.dir/build.make CMakeFiles/ziputils.dir/src/unzipper.cpp.s
 	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/src/unzipper.cpp.s
 .PHONY : src/unzipper.cpp.s
 
@@ -407,6 +448,7 @@ src/zipper.o: src/zipper.cpp.o
 
 # target to build an object file
 src/zipper.cpp.o:
+	$(MAKE) -f CMakeFiles/ziputils.dir/build.make CMakeFiles/ziputils.dir/src/zipper.cpp.o
 	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/src/zipper.cpp.o
 .PHONY : src/zipper.cpp.o
 
@@ -416,6 +458,7 @@ src/zipper.i: src/zipper.cpp.i
 
 # target to preprocess a source file
 src/zipper.cpp.i:
+	$(MAKE) -f CMakeFiles/ziputils.dir/build.make CMakeFiles/ziputils.dir/src/zipper.cpp.i
 	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/src/zipper.cpp.i
 .PHONY : src/zipper.cpp.i
 
@@ -425,6 +468,7 @@ src/zipper.s: src/zipper.cpp.s
 
 # target to generate assembly for a file
 src/zipper.cpp.s:
+	$(MAKE) -f CMakeFiles/ziputils.dir/build.make CMakeFiles/ziputils.dir/src/zipper.cpp.s
 	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/src/zipper.cpp.s
 .PHONY : src/zipper.cpp.s
 
@@ -436,12 +480,14 @@ help:
 	@echo "... depend"
 	@echo "... install/strip"
 	@echo "... install/local"
-	@echo "... unzip"
-	@echo "... list_install_components"
-	@echo "... openBin"
-	@echo "... edit_cache"
-	@echo "... rebuild_cache"
 	@echo "... install"
+	@echo "... list_install_components"
+	@echo "... rebuild_cache"
+	@echo "... ziputils"
+	@echo "... openBin"
+	@echo "... unzip"
+	@echo "... edit_cache"
+	@echo "... elzip"
 	@echo "... minizip/src/ioapi.o"
 	@echo "... minizip/src/ioapi.i"
 	@echo "... minizip/src/ioapi.s"

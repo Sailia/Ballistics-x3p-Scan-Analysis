@@ -63,13 +63,88 @@ CMAKE_SOURCE_DIR = /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMa
 CMAKE_BINARY_DIR = /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build
 
 #=============================================================================
+# Target rules for target CMakeFiles/ziputils.dir
+
+# All Build rule for target.
+CMakeFiles/ziputils.dir/all:
+	$(MAKE) -f CMakeFiles/ziputils.dir/build.make CMakeFiles/ziputils.dir/depend
+	$(MAKE) -f CMakeFiles/ziputils.dir/build.make CMakeFiles/ziputils.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles --progress-num=17,18,19 "Built target ziputils"
+.PHONY : CMakeFiles/ziputils.dir/all
+
+# Include target in all.
+all: CMakeFiles/ziputils.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/ziputils.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles 3
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ziputils.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles 0
+.PHONY : CMakeFiles/ziputils.dir/rule
+
+# Convenience name for target.
+ziputils: CMakeFiles/ziputils.dir/rule
+
+.PHONY : ziputils
+
+# clean rule for target.
+CMakeFiles/ziputils.dir/clean:
+	$(MAKE) -f CMakeFiles/ziputils.dir/build.make CMakeFiles/ziputils.dir/clean
+.PHONY : CMakeFiles/ziputils.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/ziputils.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/openBin.dir
+
+# All Build rule for target.
+CMakeFiles/openBin.dir/all:
+	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/depend
+	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12 "Built target openBin"
+.PHONY : CMakeFiles/openBin.dir/all
+
+# Include target in all.
+all: CMakeFiles/openBin.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/openBin.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles 10
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/openBin.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles 0
+.PHONY : CMakeFiles/openBin.dir/rule
+
+# Convenience name for target.
+openBin: CMakeFiles/openBin.dir/rule
+
+.PHONY : openBin
+
+# clean rule for target.
+CMakeFiles/openBin.dir/clean:
+	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/clean
+.PHONY : CMakeFiles/openBin.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/openBin.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/unzip.dir
 
 # All Build rule for target.
-CMakeFiles/unzip.dir/all:
+CMakeFiles/unzip.dir/all: CMakeFiles/ziputils.dir/all
+CMakeFiles/unzip.dir/all: CMakeFiles/elzip.dir/all
 	$(MAKE) -f CMakeFiles/unzip.dir/build.make CMakeFiles/unzip.dir/depend
 	$(MAKE) -f CMakeFiles/unzip.dir/build.make CMakeFiles/unzip.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles --progress-num=8,9,10,11 "Built target unzip"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles --progress-num=13,14,15,16 "Built target unzip"
 .PHONY : CMakeFiles/unzip.dir/all
 
 # Include target in all.
@@ -79,7 +154,7 @@ all: CMakeFiles/unzip.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/unzip.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/unzip.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles 0
 .PHONY : CMakeFiles/unzip.dir/rule
@@ -100,39 +175,39 @@ clean: CMakeFiles/unzip.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/openBin.dir
+# Target rules for target CMakeFiles/elzip.dir
 
 # All Build rule for target.
-CMakeFiles/openBin.dir/all:
-	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/depend
-	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target openBin"
-.PHONY : CMakeFiles/openBin.dir/all
+CMakeFiles/elzip.dir/all:
+	$(MAKE) -f CMakeFiles/elzip.dir/build.make CMakeFiles/elzip.dir/depend
+	$(MAKE) -f CMakeFiles/elzip.dir/build.make CMakeFiles/elzip.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles --progress-num=1,2 "Built target elzip"
+.PHONY : CMakeFiles/elzip.dir/all
 
 # Include target in all.
-all: CMakeFiles/openBin.dir/all
+all: CMakeFiles/elzip.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/openBin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles 7
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/openBin.dir/all
+CMakeFiles/elzip.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/elzip.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles 0
-.PHONY : CMakeFiles/openBin.dir/rule
+.PHONY : CMakeFiles/elzip.dir/rule
 
 # Convenience name for target.
-openBin: CMakeFiles/openBin.dir/rule
+elzip: CMakeFiles/elzip.dir/rule
 
-.PHONY : openBin
-
-# clean rule for target.
-CMakeFiles/openBin.dir/clean:
-	$(MAKE) -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/clean
-.PHONY : CMakeFiles/openBin.dir/clean
+.PHONY : elzip
 
 # clean rule for target.
-clean: CMakeFiles/openBin.dir/clean
+CMakeFiles/elzip.dir/clean:
+	$(MAKE) -f CMakeFiles/elzip.dir/build.make CMakeFiles/elzip.dir/clean
+.PHONY : CMakeFiles/elzip.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/elzip.dir/clean
 
 .PHONY : clean
 

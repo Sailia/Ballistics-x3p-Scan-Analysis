@@ -36,7 +36,7 @@ CMAKE_CXX_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar-8
 CMAKE_CXX_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib-8
 
 //Flags used by the compiler during all build types.
-CMAKE_CXX_FLAGS:STRING=
+CMAKE_CXX_FLAGS:STRING=-lz
 
 //Flags used by the compiler during debug builds.
 CMAKE_CXX_FLAGS_DEBUG:STRING=-g
@@ -182,7 +182,19 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 CMAKE_VERBOSE_MAKEFILE:BOOL=ON
 
 //Path to a library.
+ELZIP_LIB:FILEPATH=/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/libelzip.a
+
+//Path to a library.
+UNZIP_LIB:FILEPATH=/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/libunzip.a
+
+//Path to a library.
+ZIPUTILS_LIB:FILEPATH=/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/libziputils.a
+
+//Path to a library.
 ZLIB_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libz.a
+
+//Dependencies for the target
+elzip_LIB_DEPENDS:STATIC=general;stdc++fs;
 
 //Value Computed by CMake
 openBin_BINARY_DIR:STATIC=/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build
@@ -191,7 +203,10 @@ openBin_BINARY_DIR:STATIC=/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/open
 openBin_SOURCE_DIR:STATIC=/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake
 
 //Dependencies for the target
-unzip_LIB_DEPENDS:STATIC=general;stdc++fs;general;zlibstatic;
+unzip_LIB_DEPENDS:STATIC=general;stdc++fs;general;elzip;general;ziputils;general;zlibstatic;
+
+//Dependencies for the target
+ziputils_LIB_DEPENDS:STATIC=general;stdc++fs;
 
 
 ########################
