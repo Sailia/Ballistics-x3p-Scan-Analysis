@@ -227,11 +227,11 @@ std::vector<std::string> x3pNames;
 int main( int argc, char *argv[] )
 {
 	std::cout << "Please enter the file path to the data directory: " << std::endl;
-	std::cin >> dataPath;
+	std::getline(std::cin, dataPath);
 	std::cout << "Please enter the file path to the properly formatted temporary storage directory: " << std::endl;
-	std::cin >> tempPath;
+	std::getline(std::cin, tempPath);
 	std::cout << "Enter 'y' to see debug info, enter anything else otherwise" << std::endl;
-	std::cin >> debugAnswer;
+	std::getline(std::cin, debugAnswer);
 	displayDebug = (debugAnswer == "y");
 
 	x3pNames = fileNames(dataPath);
