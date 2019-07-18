@@ -1,0 +1,119 @@
+(base) susan@yeti:~/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build$ cmake .
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build
+(base) susan@yeti:~/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build$ make
+/usr/bin/cmake -H/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake -B/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/cmake -E cmake_progress_start /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles/progress.marks
+make -f CMakeFiles/Makefile2 all
+make[1]: Entering directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+make -f CMakeFiles/ziputils.dir/build.make CMakeFiles/ziputils.dir/depend
+make[2]: Entering directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+cd /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles/ziputils.dir/DependInfo.cmake --color=
+make[2]: Leaving directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+make -f CMakeFiles/ziputils.dir/build.make CMakeFiles/ziputils.dir/build
+make[2]: Entering directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+make[2]: Nothing to be done for 'CMakeFiles/ziputils.dir/build'.
+make[2]: Leaving directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+[ 15%] Built target ziputils
+make -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/depend
+make[2]: Entering directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+cd /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles/openBin.dir/DependInfo.cmake --color=
+make[2]: Leaving directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+make -f CMakeFiles/openBin.dir/build.make CMakeFiles/openBin.dir/build
+make[2]: Entering directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+[ 21%] Building CXX object CMakeFiles/openBin.dir/src/openBin.cpp.o
+/usr/bin/c++   -I/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/include  -lz -lz   -o CMakeFiles/openBin.dir/src/openBin.cpp.o -c /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/src/openBin.cpp
+[ 26%] Building CXX object CMakeFiles/openBin.dir/src/stdafx.cpp.o
+/usr/bin/c++   -I/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/include  -lz -lz   -o CMakeFiles/openBin.dir/src/stdafx.cpp.o -c /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/src/stdafx.cpp
+[ 31%] Building CXX object CMakeFiles/openBin.dir/src/pch.cpp.o
+/usr/bin/c++   -I/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/include  -lz -lz   -o CMakeFiles/openBin.dir/src/pch.cpp.o -c /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/src/pch.cpp
+[ 36%] Linking CXX executable openBin
+/usr/bin/cmake -E cmake_link_script CMakeFiles/openBin.dir/link.txt --verbose=1
+/usr/bin/c++   -lz -lz  -rdynamic CMakeFiles/openBin.dir/minizip/src/unzip.c.o CMakeFiles/openBin.dir/minizip/src/zip.c.o CMakeFiles/openBin.dir/minizip/src/ioapi.c.o CMakeFiles/openBin.dir/src/elzip.cpp.o CMakeFiles/openBin.dir/src/unzipper.cpp.o CMakeFiles/openBin.dir/src/zipper.cpp.o CMakeFiles/openBin.dir/src/openBin.cpp.o CMakeFiles/openBin.dir/src/stdafx.cpp.o CMakeFiles/openBin.dir/src/pch.cpp.o  -o openBin -lstdc++fs -Wl,-Bstatic -lz -Wl,-Bdynamic libunzip.a libziputils.a libelzip.a 
+make[2]: Leaving directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+[ 68%] Built target openBin
+make -f CMakeFiles/elzip.dir/build.make CMakeFiles/elzip.dir/depend
+make[2]: Entering directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+cd /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles/elzip.dir/DependInfo.cmake --color=
+Scanning dependencies of target elzip
+make[2]: Leaving directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+make -f CMakeFiles/elzip.dir/build.make CMakeFiles/elzip.dir/build
+make[2]: Entering directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+[ 73%] Building CXX object CMakeFiles/elzip.dir/src/elzip.cpp.o
+/usr/bin/c++   -I/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/include  -lz -lz   -o CMakeFiles/elzip.dir/src/elzip.cpp.o -c /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/src/elzip.cpp
+[ 78%] Linking CXX static library libelzip.a
+/usr/bin/cmake -P CMakeFiles/elzip.dir/cmake_clean_target.cmake
+/usr/bin/cmake -E cmake_link_script CMakeFiles/elzip.dir/link.txt --verbose=1
+/usr/bin/ar qc libelzip.a  CMakeFiles/elzip.dir/src/elzip.cpp.o
+/usr/bin/ranlib libelzip.a
+make[2]: Leaving directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+[ 78%] Built target elzip
+make -f CMakeFiles/unzip.dir/build.make CMakeFiles/unzip.dir/depend
+make[2]: Entering directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+cd /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles/unzip.dir/DependInfo.cmake --color=
+Scanning dependencies of target unzip
+make[2]: Leaving directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+make -f CMakeFiles/unzip.dir/build.make CMakeFiles/unzip.dir/build
+make[2]: Entering directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+[ 84%] Linking CXX static library libunzip.a
+/usr/bin/cmake -P CMakeFiles/unzip.dir/cmake_clean_target.cmake
+/usr/bin/cmake -E cmake_link_script CMakeFiles/unzip.dir/link.txt --verbose=1
+/usr/bin/ar qc libunzip.a  CMakeFiles/unzip.dir/minizip/src/unzip.c.o CMakeFiles/unzip.dir/minizip/src/zip.c.o CMakeFiles/unzip.dir/minizip/src/ioapi.c.o
+/usr/bin/ranlib libunzip.a
+make[2]: Leaving directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+[100%] Built target unzip
+make[1]: Leaving directory '/home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build'
+/usr/bin/cmake -E cmake_progress_start /home/susan/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build/CMakeFiles 0
+(base) susan@yeti:~/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build$ ls
+CMakeCache.txt  CMakeFiles  cmake_install.cmake  libelzip.a  libunzip.a  libunzipper.a  libziputils.a  Makefile  openBin
+(base) susan@yeti:~/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build$ sudo mount /media/Raven
+[sudo] password for susan: 
+srvander@isu-csafe.stat.iastate.edu's password: 
+(base) susan@yeti:~/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build$ openBin /media/Raven/LAPD/FAU 5/Bullet A/
+openBin: command not found
+(base) susan@yeti:~/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build$ ./openBin /media/Raven/LAPD/FAU 5/Bullet A/
+Please enter the file path to the data directory: 
+^C
+(base) susan@yeti:~/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build$ ./openBin
+Please enter the file path to the data directory: 
+/media/Raven/LAPD/FAU 5/Bullet A/
+Please enter the file path to the properly formatted temporary storage directory: 
+Enter 'y' to see debug info, enter anything else otherwise
+terminate called after throwing an instance of 'std::experimental::filesystem::v1::__cxx11::filesystem_error'
+  what():  filesystem error: directory iterator cannot open directory: No such file or directory [/media/Raven/LAPD/FAU]
+Aborted (core dumped)
+(base) susan@yeti:~/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build$ ./openBin
+Please enter the file path to the data directory: 
+"/media/Raven/LAPD/FAU 5/Bullet A/
+Please enter the file path to the properly formatted temporary storage directory: 
+Enter 'y' to see debug info, enter anything else otherwise
+terminate called after throwing an instance of 'std::experimental::filesystem::v1::__cxx11::filesystem_error'
+  what():  filesystem error: directory iterator cannot open directory: No such file or directory ["/media/Raven/LAPD/FAU]
+Aborted (core dumped)
+(base) susan@yeti:~/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build$ ./openBin
+Please enter the file path to the data directory: 
+"/media/Raven/LAPD/FAU\ 5/Bullet\ A/"
+Please enter the file path to the properly formatted temporary storage directory: 
+Enter 'y' to see debug info, enter anything else otherwise
+terminate called after throwing an instance of 'std::experimental::filesystem::v1::__cxx11::filesystem_error'
+  what():  filesystem error: directory iterator cannot open directory: No such file or directory ["/media/Raven/LAPD/FAU\]
+Aborted (core dumped)
+(base) susan@yeti:~/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build$ ./openBin
+Please enter the file path to the data directory: 
+/media/Raven/LAPD/FAU\ 5/Bullet\ A
+Please enter the file path to the properly formatted temporary storage directory: 
+Enter 'y' to see debug info, enter anything else otherwise
+terminate called after throwing an instance of 'std::experimental::filesystem::v1::__cxx11::filesystem_error'
+  what():  filesystem error: directory iterator cannot open directory: No such file or directory [/media/Raven/LAPD/FAU\]
+Aborted (core dumped)
+(base) susan@yeti:~/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build$ ./openBin
+Please enter the file path to the data directory: 
+'/media/Raven/LAPD/FAU\ 5/Bullet\ A'
+Please enter the file path to the properly formatted temporary storage directory: 
+Enter 'y' to see debug info, enter anything else otherwise
+terminate called after throwing an instance of 'std::experimental::filesystem::v1::__cxx11::filesystem_error'
+  what():  filesystem error: directory iterator cannot open directory: No such file or directory ['/media/Raven/LAPD/FAU\]
+Aborted (core dumped)
+(base) susan@yeti:~/Projects/CSAFE/2019-x3p-scan-analysis/openBin_CMake/build$ 
+
