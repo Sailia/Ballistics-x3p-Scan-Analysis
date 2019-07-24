@@ -16,11 +16,18 @@
 #include "elzip.hpp"
 #include <experimental/filesystem>
 #include <map>
-#include <math.h>       /* round, floor, ceil, trunc */
+#include <math.h>
 
 using namespace ziputils;
 namespace fs = std::experimental::filesystem;
 
+/* Parameters:
+	string fileName:
+		path of file to be read
+   
+   Result:
+	returns string formatted content of fileName
+*/
 std::string getFile(std::string fileName) {
 	std::string buffer;
 	char c;
@@ -35,6 +42,15 @@ std::string getFile(std::string fileName) {
 	return buffer;
 }
 
+/* Parameters:
+	const string &text:
+		pointer to string containing xml content
+	string tag:
+		tag name
+   
+   Result:
+	returns vector of values, from every instance of tag, in string format
+*/
 std::vector<std::string> getData(const std::string &text, std::string tag)
 {
 	std::vector<std::string> collection;
@@ -51,6 +67,13 @@ std::vector<std::string> getData(const std::string &text, std::string tag)
 	}
 }
 
+/* Parameters:
+	string &text:
+		pointer to text for parsing
+
+   Result:
+	removes tag brackets from text
+*/
 void stripTags(std::string &text)
 {
 	unsigned int start = 0, pos;
@@ -63,10 +86,19 @@ void stripTags(std::string &text)
 	}
 }
 
-void unzip(std::string unzipFilePath, std::string outputPath)
+/* Parameters:
+	string unzipFile:
+		path to file to be decompressed
+	string outputPath:
+		path to output folder/directory
+
+   Result: 
+	decompresses unzipFile to outputPath
+*/
+void unzip(std::string unzipFile, std::string outputPath)
 {
 	unzipper zipFile;
-	zipFile.open(unzipFilePath.c_str());
+	zipFile.open(unzipFile.c_str());
 	auto filenames = zipFile.getFilenames();
 
 	for (auto it = filenames.begin(); it != filenames.end(); it++)
@@ -80,6 +112,13 @@ void unzip(std::string unzipFilePath, std::string outputPath)
 	}
 }
 
+/* Parameters:
+	string folderPath:
+		path to folder
+
+   Result:
+	returns vector of names of files within folderPath
+*/
 std::vector<std::string> fileNames(std::string folderPath) {
 	std::vector<std::string> nameList;
 	for (const auto & entry : fs::directory_iterator(folderPath)) {
@@ -89,10 +128,20 @@ std::vector<std::string> fileNames(std::string folderPath) {
 	return nameList;
 }
 
-int getDim(std::string xmlFilePath, std::string dimTag) {
+/* Parameters:
+	string xmlFile:
+		path to xml file to search through
+	string dimTag:
+		name of tag, with an integer value, to search for (i.e. "Size X")
+		assumed only one instance of tag
+
+   Result:
+	returns integer value stored in xmlFile for dimTag
+*/
+int getDim(std::string xmlFile, std::string dimTag) {
 	int dim = 0;;
 
-	std::string text = getFile(xmlFilePath);
+	std::string text = getFile(xmlFile);
 	std::vector<std::string> allXTag = getData(text, dimTag);
 	for (std::string &s : allXTag)
 	{
@@ -104,6 +153,15 @@ int getDim(std::string xmlFilePath, std::string dimTag) {
 	return dim;
 }
 
+/* Parameters:
+	vector<double> x:
+		double vector containing x values
+	vector<double> y:
+		double vector containing corresponding y values
+
+   Result:
+	returns linear regression slope for given x and y values as a double
+*/
 double regressionSlope(std::vector<double> x, std::vector<double> y) {
 	if (x.size() != y.size()) {
 		throw "inequal vector sizes";
@@ -131,6 +189,15 @@ double regressionSlope(std::vector<double> x, std::vector<double> y) {
 	return numerator / denominator;
 }
 
+/* Parameters:
+	string tempStorageFilePath:
+		path to decompressed contents of x3p file
+
+   Result:
+	temporarily stores data stored within x3p's data.bin within vector<vector<double>> dataMatrix
+	outputs percent of missing values from nine blocks of dataMatrix to console
+	outputs 6 linear regression slopes, each consisting of 3 consecutive columns of data, to console
+*/
 void processDataMatrix(std::string tempStorageFilePath) { //takes in string of filepath and output of filepath
 	std::vector<std::vector<double>> dataMatrix;
 	int xDim = getDim(tempStorageFilePath + "/main.xml", "SizeX"), yDim = getDim(tempStorageFilePath + "/main.xml", "SizeY"); //set x and y dimension to dimensions found in XML file
@@ -182,8 +249,7 @@ void processDataMatrix(std::string tempStorageFilePath) { //takes in string of f
 	}
 	input.close(); //close input file
 
-	/*std::ofstream resultOutput;
-	resultOutput.open(resultOutputFilePath);*/
+	std::cout << "Block % Missing: " << std::endl;
 
 	std::cout << "|" << std::setw(10) << roundf(((nanSum[0][0] / xPartition) / yPartition)* 100 ) / 100;
 	std::cout << "|" << std::setw(10) << roundf(((nanSum[1][0] / xPartition) / yPartition)* 100 ) / 100;
@@ -197,52 +263,120 @@ void processDataMatrix(std::string tempStorageFilePath) { //takes in string of f
 	std::cout << "|" << std::setw(10) << roundf(((nanSum[1][2] / xPartition) / yPartition) * 100) / 100;
 	std::cout << "|" << std::setw(10) << roundf(((nanSum[2][2] / (xDim - 2 * xPartition)) / (yDim - 2 * yPartition)) * 100) / 100 << "|" << std::endl;
 
-	std::vector<double> x,leftLeftPartition,middleLeftPartition,rightLeftPartition,leftRightPartition,middleRightPartition,rightRightPartition;
-	for (int j = 0; j < 3; ++j) {
+	std::vector<double> x,leftPartition, rightPartition;
+	for (int j = 0; j < 9; ++j) {
 		for (int i = 0; i < yDim; ++i) {
 			x.push_back((double)i);
-			leftLeftPartition.push_back(dataMatrix[xPartition - 4 + j][i]);
-			middleLeftPartition.push_back(dataMatrix[xPartition - 1 + j][i]);
-			rightLeftPartition.push_back(dataMatrix[xPartition + 2 + j][i]);
-			leftRightPartition.push_back(dataMatrix[2*xPartition - 4 + j][i]);
-			middleRightPartition.push_back(dataMatrix[2*xPartition - 1 + j][i]);
-			rightRightPartition.push_back(dataMatrix[2*xPartition + 2 + j][i]);
+			leftPartition.push_back(dataMatrix[xPartition - 4 + j][i]);
+			rightPartition.push_back(dataMatrix[2*xPartition - 4 + j][i]);
 		}
 	}
 
-	std::cout << "slope 1: " << std::setw(10) << regressionSlope(x, leftLeftPartition) << std::endl;
-	std::cout << "slope 2: " << std::setw(10) << regressionSlope(x, middleLeftPartition) << std::endl;
-	std::cout << "slope 3: " << std::setw(10) << regressionSlope(x, rightLeftPartition) << std::endl;
-	std::cout << "slope 4: " << std::setw(10) << regressionSlope(x, leftRightPartition) << std::endl;
-	std::cout << "slope 5: " << std::setw(10) << regressionSlope(x, middleRightPartition) << std::endl;
-	std::cout << "slope 6: " << std::setw(10) << regressionSlope(x, rightRightPartition) << std::endl;
-
-	//resultOutput.close();
+	std::cout << "Left Slope: " << std::setw(10) << regressionSlope(x, leftPartition) << std::endl;
+	std::cout << "Right Slope: " << std::setw(10) << regressionSlope(x, rightPartition) << std::endl;
 }
 
-bool displayDebug;
-std::string dataPath, tempPath, debugAnswer;
+bool displayDebug = false; //whether to output debug info to console
+std::string filePath, tempPath = "./tempdir"; //dataPath = path to data directory, tempPath = path to temporary decompressed data storage directory
 std::vector<std::string> x3pNames;
 
-int main( int argc, char *argv[] )
+int main(int argc, char *argv[])
 {
-	std::cout << "Please enter the file path to the data directory: " << std::endl;
-	std::getline(std::cin, dataPath);
-	std::cout << "Please enter the file path to the properly formatted temporary storage directory: " << std::endl;
-	std::getline(std::cin, tempPath);
-	std::cout << "Enter 'y' to see debug info, enter anything else otherwise" << std::endl;
-	std::getline(std::cin, debugAnswer);
-	displayDebug = (debugAnswer == "y");
-
-	x3pNames = fileNames(dataPath);
-
-	for (std::string path : x3pNames) {
-		elz::extractZip(displayDebug, path, tempPath);
-		processDataMatrix(tempPath);
-		for (const auto & entry : fs::directory_iterator(tempPath)) {
-			fs::remove_all(fs::path(entry));
+	bool runExtract = true;
+	if (argc <= 1 || argc > 4) {
+		std::cout << "ERROR: Incorrect arguments. Please use -help command to display commands" << std::endl;
+		runExtract = false;
+	}
+	else {
+		if (argc == 2) {
+			std::string isHelp = argv[1];
+			if (isHelp == "-help") {
+				std::cout << "-debug : display debug information" << std::endl;
+				std::cout << "-extractdir=\"<directory path>\" : specify directory for temporarily storing decompressed data, exclude '<>'. omit to default to \"./tempdata\"" << std::endl;
+				std::cout << "\"<file path>\" : specify path to x3p file to be processed, exclude '<>'" << std::endl;
+			}
+			else {
+				std::cout << "ERROR: Incorrect arguments. Please use -help command to display commands" << std::endl;
+			}
+			runExtract = false;
+		}
+		else {
+			for (int i = 1; i < argc; ++i) {
+				std::string tempToString = argv[i];
+				if (tempToString == "-debug") {
+					displayDebug = true;
+				}
+				else if (tempToString.find("-extractdir") != std::string::npos) {
+					tempPath = tempToString.substr(tempToString.find("=") + 1);
+				}
+				else {
+					if (tempToString.substr(tempToString.length() - 4) != ".x3p") {
+						std::cout << "ERROR: Did not pass a x3p file" << std::endl;
+						runExtract = false;
+					}
+					else {
+						filePath = tempToString;
+					}
+				}
+			}
 		}
 	}
+	if (runExtract) {
+		std::cout << filePath << std::endl;
+		bool isOpen = elz::extractZip(displayDebug, filePath, tempPath);
+		if (isOpen) {
+			processDataMatrix(tempPath);
+			for (const auto & entry : fs::directory_iterator(tempPath)) {
+				fs::remove_all(fs::path(entry));
+			}
+		}
+		else {
+			std::cout << "ERROR: invalid x3p file" << std::endl;
+		}
+	}
+	//int x3pIndex = 0;
+	//if (argc == 2 && argv[1] == "-help") {
+	//	std::cout << "openBin <\"-debug\" to show debug information, omit otherwise> <path to temporary storage directory> <path to file to decompress>" << std::endl;
+	//	std::cout << "i.e. \"openBin -debug C:/Documents/tempFolder C:/Documents/dataFolder/bulletscan.x3p\"" << std::endl;
+	//}
+	//else if (argc >= 2 && argc <= 4) {
+	//	bool runExtract = true;
+	//	if (argc == 2) {
+	//		x3pIndex = 1;
+	//		/*std::string dataPath = argv[1];
+	//		if (dataPath.substr(dataPath.length() - 4) != ".x3p") {
+	//			std::cout << "ERROR: Did not pass a x3p file" << std::endl;
+	//			runExtract = false;
+	//		}*/
+	//	}
+	//	else if (argc == 3) {
+	//		x3pIndex = 2;
+	//		if (argv[1] = "-debug") {
+	//			displayDebug = true;
+	//		}
+	//		else {
+	//			std::string dataPath = argv[2];
+	//			if (dataPath.substr(dataPath.length() - 4) != ".x3p") {
+	//				std::cout << "ERROR: Did not pass a x3p file" << std::endl;
+	//				runExtract = false;
+	//			}
+	//		}
+	//	}
+	//		elz::extractZip(displayDebug, dataPath + "/" + file + ".x3p", tempPath);
+	//		processDataMatrix(tempPath);
+	//		for (const auto & entry : fs::directory_iterator(tempPath)) {
+	//			fs::remove_all(fs::path(entry));
+	//		}
+
+	//x3pNames = fileNames(dataPath); //get list of paths to each file
+
+	//for (std::string path : x3pNames) {
+	//	elz::extractZip(displayDebug, path, tempPath);
+	//	processDataMatrix(tempPath);
+	//	for (const auto & entry : fs::directory_iterator(tempPath)) {
+	//		fs::remove_all(fs::path(entry));
+	//	}
+	//}
 
 	//processDataMatrix("C:/Users/tji/source/repos/openBin/openBin/testzipoutput", "C:/Users/tji/source/repos/openBin/openBin/testfolder/testresults.txt");
 
